@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            // Menghubungkan pembayaran ke booking tertentu
+            // Menghubungkan ke tabel bookings (siapa penghuni yang bayar)
             $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
-            $table->integer('amount');
-            $table->date('payment_date');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->string('proof_of_payment')->nullable(); // Tempat menyimpan nama file foto bukti bayar
+            
+            // Kolom keuangan sesuai mind-map kelompokmu
+            $table->decimal('jumlah', 12, 2); 
+            $table->date('tanggal_bayar');
+            $table->string('bukti_bayar')->nullable(); // Untuk menampung foto upload bukti transfer
+            $table->enum('status', ['Lunas', 'Belum bayar', 'Telat bayar'])->default('Belum bayar');
             $table->timestamps();
         });
     }
