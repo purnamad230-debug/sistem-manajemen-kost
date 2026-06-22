@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('room_number')->unique();
-            $table->string('type'); // Contoh: VIP, Reguler
-            $table->integer('price'); // Harga per bulan
-            $table->enum('status', ['available', 'occupied'])->default('available');
-            $table->text('description')->nullable();
+            $table->string('nomor_kamar')->unique();
+            $table->decimal('harga', 12, 2);
+            $table->text('fasilitas');
+            $table->string('foto')->nullable();
+            $table->enum('status', ['Kosong', 'Terisi', 'Maintenance'])->default('Kosong');
             $table->timestamps();
         });
     }
