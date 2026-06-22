@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            // Foreign Key ke tabel users (penghuni)
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            // Foreign Key ke tabel rooms (kamar)
             $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
-            $table->date('start_date');
-            $table->date('end_date')->nullable(); // Nullable jika sewa panjang/bulanan terus berjalan
-            $table->enum('status', ['active', 'completed', 'canceled'])->default('active');
+            $table->string('no_hp');
+            $table->string('asal_daerah');
+            $table->date('tanggal_masuk');
             $table->timestamps();
         });
     }
